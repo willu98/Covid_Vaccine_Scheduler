@@ -1,0 +1,12 @@
+.login-label{
+    margin-top: 20px;
+}
+
+.login-input {
+    font-size: 1.2em;
+}
+
+.login-error{
+    color:red;
+    font-size: .6em;
+}

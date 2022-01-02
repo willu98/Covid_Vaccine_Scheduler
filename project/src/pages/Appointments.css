@@ -1,0 +1,30 @@
+.appointments-h1 {
+    text-align: center;
+    color: #777;
+    margin-bottom: 0px;
+}
+
+.appointments-main {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: 100px auto;
+}
+
+.appointments-button {
+    margin-top: 5px;
+    background: #ff0055;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    font-size: 1.2em;
+}
+
+.ul {
+    padding: 0%;
+}
+
+.appointment-person-info {
+    font-size: 1.2em;
+    font-weight: normal;
+}

@@ -1,0 +1,71 @@
+.timebooking-center {
+    direction: flex;
+    width:50%;
+    flex-direction: column-reverse;
+    margin: 100px auto;
+}
+
+.timebooking-h1 {
+    text-align: center;
+    color: #777;
+    margin-bottom: 0px;
+}
+
+.timebooking-h1 {
+    text-align: center;
+    color: #777;
+    /* margin-bottom: 0px; */
+}
+
+.timebooking-main {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 50px auto;
+}
+
+.date-div {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.date-calendar {
+    width: 100%;
+}
+
+.date-h2 {
+    font-size: 1.2em;
+    margin-right: 10px;
+    color: #777;
+}
+
+.timebooking-table {
+    margin: auto;
+    border: solid;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.td {
+    border: solid;
+    text-align: center;
+    border-bottom: solid;
+}
+
+.timebooking-p {
+    padding: 0px;
+    margin: 0px;
+}
+.booking-button{
+    /* margin-top: 30px; */
+    background:blue;
+    padding:5px;
+    color:white;
+    border-radius:5px;
+    font-size: 0.9em;
+}
+.error {
+    color: red;
+    font-size: .8em;
+}

@@ -1,0 +1,36 @@
+.vaccines-h1 {
+    text-align: center;
+    color: #777;
+    margin-bottom: 0px;
+}
+
+.vaccines-main {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: 100px auto;
+}
+
+.vaccines-center{
+    display: flex;
+    justify-content: center;
+} 
+
+.button {
+    display: flex;
+    justify-content: center;
+    background: #ff0055;
+    color: white;
+    border-radius: 5px;
+    font-size: 1.2em;
+    margin-top: 5px;
+}
+
+.ul {
+    padding: 0%;
+}
+
+.error {
+    color: red;
+    font-size: .8em;
+}

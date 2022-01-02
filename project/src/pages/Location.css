@@ -1,0 +1,80 @@
+.location-center {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: 100px auto;
+}
+
+.location-h1 {
+    text-align: center;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.postalcode-style {
+    width: 100px;
+    height: 25px;
+    font-size: 1.2em;
+}
+
+.location-h2 {
+    text-align: left;
+    color: #777;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+.location-form {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10%;
+}
+
+.location-label {
+    margin-top: 20px;
+}
+
+.location-button {
+    margin-top: 20px;
+    width: 25%;
+}
+
+.location-input {
+    font-size: 1.2em;
+}
+
+.location-error {
+    color: red;
+    font-size: .6em;
+}
+
+.location-table {
+    display: flex;
+    flex-direction: row;
+}
+
+.location-button {
+    background: #ff0055;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    font-size: 1.2em;
+}
+
+.table-button {
+    background: #ff0055;
+    font-size: 1.2em;
+    color: white;
+    margin: 5px auto;
+    width: 100%;
+    padding: 10px;
+}
+
+.location-table {
+    display: flex;
+    justify-content: center;
+}
+.timebooking-p{
+    margin: 0px;
+    padding:0px;
+}

@@ -1,0 +1,32 @@
+.appointment-main{
+    display:flex;
+    margin-top: 10px;
+}
+
+.appointment-date{
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.appointment-button1{
+    margin-left: auto;
+    background:#0066ff;
+    padding:10px;
+    color:white;
+    border-radius:5px;
+    font-size: 1.2em;    
+}
+
+.appointment-button2{
+    margin-left: 5px;
+    background:#ff0055;
+    padding:10px;
+    color:white;
+    border-radius:5px;
+    font-size: 1.2em;    
+}
+h2{
+    font-size: 1em;
+    font-weight: normal;
+}
