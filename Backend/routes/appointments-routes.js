@@ -4,7 +4,9 @@ const router = express.Router();
 
 
 //getting appointments
-router.get('/:uid', controller.getAppointments);
+router.get('/:appid', controller.getAppointmentById);
+
+router.get('/user/:uid', controller.getAppointmentsByUserId);
 
 router.post('/test', controller.createAppointment);
 

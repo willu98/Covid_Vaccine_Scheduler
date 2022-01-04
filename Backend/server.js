@@ -1,5 +1,6 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
 const appointmentsRoutes = require('./routes/appointments-routes');
 const HttpError = require('./models/http-error');
 
@@ -25,4 +26,9 @@ app.use((error, req, res, next) => {
     res.json({message:error.message || 'unknown error occured'});
 });
 
-app.listen(5000);
+mongoose.connect('mongodb+srv://willu:wFXej5GPU233elDS@cluster0.26uff.mongodb.net/myFirstDatabase?retryWrites=true&w=majority').then(() => {
+    app.listen(5000);
+}).catch(err => {
+    console.log(err)
+
+});
