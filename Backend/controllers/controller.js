@@ -51,20 +51,20 @@ const getAppointmentsByUserId = async (req, res, next) => {
 };
 
 const createAppointment = async (req, res, next) => {
-    const { uid, location, time } = req.body;
+    const { uid, date, dose, hospital } = req.body;
     const createdAppointment = new Appointment({
         uid,
-        location, 
-        time
+        date, 
+        dose,
+        hospital
     });
     try{
-
+        await createdAppointment.save();
     }
     catch(err){
         const error = new HttpError('Unable to book appointment, please try again', 500);
         return next(error);
     }
-    await createdAppointment.save();
 
     res.status(201).json({appointment:createdAppointment});
 };
