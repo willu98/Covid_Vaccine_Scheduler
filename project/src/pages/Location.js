@@ -57,7 +57,7 @@ const Location = () => {
                 return (
                     <button className="table-button" key={obj.key} onClick={() => {
                         history.push(`/vaccines/${UID}`);
-                        setAppointment({ ...appointment, hosptialID: obj.hospital, addresID: obj.address, postalCodeID: obj.postalCode });
+                        setAppointment({ ...appointment, hospitalID: obj.hospital, addresID: obj.address, postalCodeID: obj.postalCode });
                     }}
                     >
                         <table className = "location-table">

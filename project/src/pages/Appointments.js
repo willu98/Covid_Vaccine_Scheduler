@@ -1,27 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import axios from 'axios';
+
 import Appointment from '../global/Appointment';
 import BackButton from '../global/BackButton';
 import { AppointmentContext } from '../global/Appointment-Context';
 import './Appointments.css';
 
+
+
 const Appointments = () => {
     const UID = useParams().UID;
+
+    const [loadedAppointments, setLoadedAppointments] = useState();
+
     const [appointment, setAppointment] = useContext(AppointmentContext);
-    const APPOINTMENTS = [
-        {
-            id: 'A1',
-            date: new Date("July 3 2021 11:20"),
-            dose: 'First',
-            hospital:'North York General Hospital',
-        },
-        {
-            id: 'A2',
-            date: new Date("July 4 2021 10:00"),
-            dose: 'Second',
-            hospital:'Etobicoke General Hospital',
-        }
-    ];
+
+
+    useEffect(() => {
+        const getAppointments = async () => {
+          try {
+            const responseData = await axios.get(`http://localhost:5000/api/appointments/user/${UID}`);
+            setLoadedAppointments(responseData.data.appointments);
+          } catch (err) {}
+        };
+        getAppointments();
+    });
+
     const history = useHistory();
 
 
@@ -29,15 +34,21 @@ const Appointments = () => {
         <div className="appointments-main">
             <h1 className="appointments-h1">Current Appointments</h1>
             <ul className="ul">
-                <h1 className="appointment-person-info">{appointment.first} {appointment.last} here are your current appointments:</h1>
-                {APPOINTMENTS.map(appointment => (
-                    <Appointment
-                        key={appointment.id}
-                        date={appointment.date.toDateString() + " " + appointment.date.toTimeString()}
-                        dose={appointment.dose}
-                        hospital={appointment.hospital}
-                    />
-                ))}
+                {loadedAppointments && loadedAppointments.length > 0 ? 
+                    <>
+                        <h1 className="appointment-person-info">{appointment.first} {appointment.last} here are your current appointments:</h1>
+                        {loadedAppointments.map(appointment => (                    
+                            <Appointment
+                                id={appointment.id}
+                                key={appointment.id}
+                                date={new Date(appointment.date).toDateString() + " " + new Date(appointment.date).toTimeString()}
+                                dose={appointment.dose}
+                                hospital={appointment.hospital}
+                            />
+                        ))}
+                    </>:
+                    <h1 className="appointment-person-info">You currently have no appointments booked, to book an appointment, click the button below.</h1>
+                }
             </ul>
             <button type="submit" className="appointments-button" onClick={() => history.push(`/locations/${UID}`)} >Book New Appointment</button>
             <BackButton history={history} routeToLogin = {true}></BackButton>

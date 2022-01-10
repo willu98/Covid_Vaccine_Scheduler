@@ -58,6 +58,8 @@ const createAppointment = async (req, res, next) => {
         dose,
         hospital
     });
+    console.log(createdAppointment);
+
     try{
         await createdAppointment.save();
     }
@@ -73,8 +75,31 @@ const updateAppointment = (req, res, next) => {
 
 };
 
-const deleteAppointment = (res,req,next)  => {
+const deleteAppointment = async (req,res,next)  => {
+    const appId = req.params.appid;
+    console.log(appId);
 
+    let appointment;
+    try{
+        appointment = await Appointment.findById(appId);
+    }catch(err){
+        const error = new HttpError(
+            'something went wrong could not find appointment to delete',
+            500
+        );
+        return next(error);
+    }
+
+    try{
+        await appointment.remove();
+    } catch(err){
+        const error = new HttpError(
+            'something went wrong could not delete appointment',
+            500
+        );
+        return next(error);
+    }
+    res.status(200).json({message:`Appointment successfully deleted`})
 };
 
 

@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { AppointmentContext } from '../global/Appointment-Context';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+
+import { AppointmentContext } from '../global/Appointment-Context';
 import './Confirm.css';
 import BackButton from '../global/BackButton';
 
@@ -9,6 +11,13 @@ const RequiredInfo = () => {
   const history = useHistory();
   const [appointment, setAppointment] = useContext(AppointmentContext);
   const [confirmed, setConfirmed] = useState(false);
+
+  const bookApp = async (data) => {
+    try {
+      const responseData = await axios.post(`http://localhost:5000/api/appointments/newapp`, data);
+    } catch (err) {}
+  };
+
   return (
     <div className="main">
       <h1 className="h1">Confirmation</h1>
@@ -20,8 +29,18 @@ const RequiredInfo = () => {
       <button type="submit" className="button" onClick={() => {
         if (confirmed) {
           history.push(`/appointments/${appointment.uID}`);
+          return;
         }
         setConfirmed(true);
+        console.log(appointment);
+        let data = {
+          uid:appointment.uID,
+          date: `${appointment.date} ${appointment.time}`,
+          dose: appointment.vID,
+          hospital:appointment.hospitalID
+        };
+        console.log(data);
+        bookApp(data);
       }}>
         {confirmed ? (<span>View My Appointments</span>) : <span>Confirm</span>}
       </button>

@@ -1,5 +1,8 @@
 import React from 'react';
+import axios from 'axios';
+
 import './Appointment.css';
+
 
 const Appointment = props => {
     return (
@@ -9,7 +12,7 @@ const Appointment = props => {
                 <div className="appointment-date">{props.date}</div>
             </div>
             <button className="appointment-button1">Reschedule</button>
-            <button className="appointment-button2">Cancel</button>
+            <button className="appointment-button2" onClick={async () => {await axios.delete(`http://localhost:5000/api/appointments/${props.id}`)}}>Cancel</button>
         </div>
     );
 };

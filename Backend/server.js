@@ -1,10 +1,15 @@
 const express = require('express');
+const serverless = require('serverless-http');
 const mongoose = require('mongoose');
-const dotenv = require("dotenv");
+const dotenv = require('dotenv');
+const axios = require('axios');
 
+const router = express.Router();
 const cors = require('cors');
 
 const appointmentsRoutes = require('./routes/appointments-routes');
+const locationRoutes = require('./routes/locations-routes');
+
 const HttpError = require('./models/http-error');
 
 dotenv.config();
@@ -15,8 +20,21 @@ app.use(cors());
 
 app.use(express.json());
 
+app.get('/', async (req, res) => {
+    
+        res.send(`hey`);
+      //  mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.26uff.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`);
+
+
+})
 
 app.use('/api/appointments',appointmentsRoutes);
+
+app.use('/api/hospitals', router.get('/:postcode',  async (req, res, next) => {
+    let postalCode = req.params.postcode;
+    const {data} = await axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${postalCode}&type=restaurant&key=${process.env.GOOGLE_API_KEY}`);
+    res.json(data);
+}));
 
 //unsupported routes
 app.use((req, res, next) => {
@@ -35,9 +53,6 @@ app.use((error, req, res, next) => {
     res.json({message:error.message || 'unknown error occured'});
 });
 
-mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.26uff.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`).then(() => {
-    app.listen(5000);
-}).catch(err => {
-    console.log(err)
+//app.listen(5000);
+module.exports = app;
 
-});

@@ -8,9 +8,9 @@ router.get('/:appid', controller.getAppointmentById);
 
 router.get('/user/:uid', controller.getAppointmentsByUserId);
 
-router.post('/test', controller.createAppointment);
+router.post('/newapp', controller.createAppointment);
 
 router.patch('/:uid', controller.updateAppointment);
 
-router.delete('/:uid', controller.deleteAppointment);
+router.delete('/:appid', controller.deleteAppointment);
 module.exports = router;
