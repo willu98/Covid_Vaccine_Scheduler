@@ -20,13 +20,6 @@ app.use(cors());
 
 app.use(express.json());
 
-app.get('/', async (req, res) => {
-    
-        res.send(`hey`);
-      //  mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.26uff.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`);
-
-
-})
 
 app.use('/api/appointments',appointmentsRoutes);
 
@@ -53,6 +46,11 @@ app.use((error, req, res, next) => {
     res.json({message:error.message || 'unknown error occured'});
 });
 
-//app.listen(5000);
-module.exports = app;
+try{
+    mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.26uff.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`);
+    app.listen(5000);
+} catch(err) {
+    console.log(err);
+}
+//module.exports.handler = serverless(app);
 

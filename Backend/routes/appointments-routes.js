@@ -10,7 +10,7 @@ router.get('/user/:uid', controller.getAppointmentsByUserId);
 
 router.post('/newapp', controller.createAppointment);
 
-router.patch('/:uid', controller.updateAppointment);
+router.patch('/:appid', controller.updateAppointment);
 
 router.delete('/:appid', controller.deleteAppointment);
 module.exports = router;

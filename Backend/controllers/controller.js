@@ -71,8 +71,36 @@ const createAppointment = async (req, res, next) => {
     res.status(201).json({appointment:createdAppointment});
 };
 
-const updateAppointment = (req, res, next) => {
+const updateAppointment = async (req, res, next) => {
+    const appId = req.params.appid;
 
+    const { date, dose, hospital } = req.body;
+
+    let appointment;
+    try{
+        appointment = await Appointment.findById(appId);
+    }catch(err){
+        const error = new HttpError(
+            'something went wrong could not find appointment to update',
+            500
+        );
+        return next(error);
+    }
+
+    appointment.date = date;
+    appointment.dose = dose;
+    appointment.hospital = hospital;
+    try{
+        await appointment.save();
+    } catch(err){
+        const error = new HttpError(
+            'something went wrong could not delete appointment',
+            500
+        );
+        return next(error);
+    }
+    console.log("TEST");
+    res.status(200).json({message:`Appointment successfully updated`})
 };
 
 const deleteAppointment = async (req,res,next)  => {
@@ -99,7 +127,7 @@ const deleteAppointment = async (req,res,next)  => {
         );
         return next(error);
     }
-    res.status(200).json({message:`Appointment successfully deleted`})
+    res.status(200).json({message:`Appointment successfully deleted`});
 };
 
 

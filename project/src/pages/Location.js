@@ -27,7 +27,7 @@ const Location = () => {
         "distance": "23km"
     }
     ];
-
+    console.log(appointment);
     return (
         <div className="location-center">
             <Formik

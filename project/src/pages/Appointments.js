@@ -40,6 +40,7 @@ const Appointments = () => {
                         {loadedAppointments.map(appointment => (                    
                             <Appointment
                                 id={appointment.id}
+                                uid={appointment.uid}
                                 key={appointment.id}
                                 date={new Date(appointment.date).toDateString() + " " + new Date(appointment.date).toTimeString()}
                                 dose={appointment.dose}

@@ -12,9 +12,15 @@ const RequiredInfo = () => {
   const [appointment, setAppointment] = useContext(AppointmentContext);
   const [confirmed, setConfirmed] = useState(false);
 
-  const bookApp = async (data) => {
+  const bookApp = async (data, isUpdating) => {
+    console.log(isUpdating);
     try {
-      const responseData = await axios.post(`http://localhost:5000/api/appointments/newapp`, data);
+      if(!isUpdating) {
+        const responseData = await axios.post(`http://localhost:5000/api/appointments/newapp`, data);
+      }
+      else {
+        const responseData = await axios.patch(`http://localhost:5000/api/appointments/${appointment.id}`, data);
+      }
     } catch (err) {}
   };
 
@@ -24,11 +30,22 @@ const RequiredInfo = () => {
 
       {!confirmed ? (
         <div>{appointment.first} {appointment.last}, your appointment for the {appointment.vID} vaccine to be set for <strong>{appointment.time} on {appointment.date} at {appointment.hospitalID} {appointment.addresID}, {appointment.postalCodeID}</strong><p></p>Please click the 'Confirm' button below to confirm your appointment.</div>)
-        : <div>{appointment.first} {appointment.last}, You have booked your appointment for the {appointment.vID} vaccine at <strong>{appointment.time} on {appointment.date} at {appointment.hospitalID} {appointment.addresID}, {appointment.postalCodeID}</strong> <p></p></div>
+        : <div>{appointment.first} {appointment.last}, You have {appointment.isUpdating ? <>updated</>:<>booked</>} your appointment for the {appointment.vID} vaccine at <strong>{appointment.time} on {appointment.date} at {appointment.hospitalID} {appointment.addresID}, {appointment.postalCodeID}</strong> <p></p></div>
       }
       <button type="submit" className="button" onClick={() => {
         if (confirmed) {
           history.push(`/appointments/${appointment.uID}`);
+          setAppointment({
+            ...appointment,
+            hospitalID:"",
+            addressID:"",
+            postalCodeID:"",
+            vID:"",
+            date:"",
+            time:"",
+            id:"",
+            updating:false
+          });
           return;
         }
         setConfirmed(true);
@@ -39,8 +56,7 @@ const RequiredInfo = () => {
           dose: appointment.vID,
           hospital:appointment.hospitalID
         };
-        console.log(data);
-        bookApp(data);
+        bookApp(data, appointment.updating);
       }}>
         {confirmed ? (<span>View My Appointments</span>) : <span>Confirm</span>}
       </button>
@@ -50,7 +66,7 @@ const RequiredInfo = () => {
           className="button"
           style={{ background: "blue" }}
           onClick={() => {
-            history.push('/');
+            history.push('/');            
           }}>Book For Another Person</button>
       }
     </div>
